@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code 安装教程 — QClaw + DeepSeek + CC-Switch</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --card: #161b22;
+    --border: #30363d;
+    --text: #c9d1d9;
+    --accent: #58a6ff;
+    --green: #3fb950;
+    --orange: #d2991d;
+    --purple: #bc8cff;
+    --red: #f85149;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.75;
+  }
+  #app {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 40px 20px;
+  }
+  h1 {
+    font-size: 2em;
+    text-align: center;
+    background: linear-gradient(135deg, var(--accent), var(--purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 6px;
+  }
+  .subtitle {
+    text-align: center;
+    color: #8b949e;
+    margin-bottom: 36px;
+  }
+
+  .hero-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 36px;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+  .hero-card p { color: #8b949e; font-size: 1.05em; }
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 20px;
+  }
+  .hero-stat { text-align: center; }
+  .hero-stat .num { font-size: 2em; font-weight: 700; color: var(--accent); }
+  .hero-stat .label { font-size: 0.85em; color: #8b949e; }
+
+  .section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 24px;
+  }
+  .section h2 {
+    font-size: 1.25em;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section h3 {
+    font-size: 1.05em;
+    margin: 22px 0 8px;
+    color: var(--accent);
+  }
+  .section p { margin: 8px 0; }
+
+  .step-label {
+    display: inline-block;
+    background: var(--accent);
+    color: #fff;
+    min-width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 30px;
+    font-size: 0.85em;
+    font-weight: bold;
+    flex-shrink: 0;
+  }
+
+  pre {
+    background: #0d1117;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 18px;
+    overflow-x: auto;
+    font-size: 0.9em;
+    margin: 10px 0;
+  }
+  code { font-family: "Cascadia Code", "Fira Code", Consolas, monospace; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .url-box {
+    display: inline-block;
+    background: #1b2230;
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-family: Consolas, monospace;
+    color: var(--green);
+    margin: 8px 0;
+  }
+  .url-box a { color: var(--green); }
+
+  .note {
+    background: #1b2230;
+    border-left: 3px solid var(--accent);
+    padding: 10px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 0.95em;
+  }
+  .warn {
+    background: #2b1a1a;
+    border-left: 3px solid var(--orange);
+    padding: 10px 16px;
+    border-radius: 0 8px 8px 0;
+    margin: 12px 0;
+    font-size: 0.95em;
+  }
+  ol, ul { margin-left: 20px; }
+  li { margin: 5px 0; }
+
+  hr { border-color: var(--border); margin: 30px 0; }
+  .footer {
+    text-align: center;
+    color: #484f58;
+    font-size: 0.85em;
+    margin-top: 40px;
+  }
+</style>
+</head>
+<body>
+
+<div id="app">
+
+<h1>🚀 Claude Code 安装 & DeepSeek V4 Pro 接入</h1>
+<p class="subtitle">照着本页一步步操作，10 分钟完成 · 全程无需远程协助</p>
+
+<div class="hero-card">
+  <p>本教程将带你完成三件事：</p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="num">1</div><div class="label">用 QClaw 安装<br>Claude Code</div></div>
+    <div class="hero-stat"><div class="num">2</div><div class="label">注册 DeepSeek<br>获取 API Key</div></div>
+    <div class="hero-stat"><div class="num">3</div><div class="label">用 CC-Switch<br>管理模型切换</div></div>
+  </div>
+</div>
+
+<!-- ====== Part 1: QClaw ====== -->
+<div class="section">
+  <h2><span class="step-label">1</span> 用 QClaw 安装 Claude Code</h2>
+  <p>QClaw 是第三方桌面管理工具，<strong>图形化一键安装</strong>，无需敲命令。</p>
+
+  <h3>1.1 打开 QClaw 官网下载</h3>
+  <div class="url-box">🔗 <a href="https://qclaw.app" target="_blank">https://qclaw.app</a></div>
+  <p>用浏览器打开 → 点击「下载」→ 双击安装包 → 按提示完成安装 → 启动 QClaw。</p>
+
+  <h3>1.2 在 QClaw 中安装 Claude Code</h3>
+  <ol>
+    <li>启动 QClaw，进入主界面</li>
+    <li>点击左侧菜单 <strong>「安装 Claude Code」</strong></li>
+    <li>点击 <strong>「一键安装」</strong></li>
+    <li>等待自动完成 Node.js 检测 + Claude Code 安装（约 2 分钟）</li>
+    <li>看到 <strong>"已安装 ✓"</strong> 即完成</li>
+  </ol>
+
+  <h3>1.3 验证安装</h3>
+  <p>在 QClaw 的命令输入框输入：</p>
+  <pre><code>claude --version</code></pre>
+  <p>返回版本号（如 v1.0.x）说明安装成功。</p>
+
+  <div class="note">
+    💡 QClaw 自动处理 Node.js 依赖，你不需要手动安装任何其他东西。
+  </div>
+</div>
+
+<!-- ====== Part 2: DeepSeek ====== -->
+<div class="section">
+  <h2><span class="step-label">2</span> 注册 DeepSeek 获取 API Key</h2>
+  <p>Claude Code 默认走 Anthropic 官方 API（贵且需海外卡）。接 DeepSeek V4 Pro 只要 ¥1/百万 token，够日常用很久。</p>
+
+  <h3>2.1 注册账号</h3>
+  <div class="url-box">🔗 <a href="https://platform.deepseek.com" target="_blank">https://platform.deepseek.com</a></div>
+  <ol>
+    <li>打开网址 → 点 <strong>「注册」</strong>（手机号或邮箱）</li>
+    <li>注册完登录，进入控制台</li>
+  </ol>
+
+  <h3>2.2 创建 API Key</h3>
+  <ol>
+    <li>左侧菜单点 <strong>「API Keys」</strong></li>
+    <li>点 <strong>「创建 API Key」</strong></li>
+    <li>名称填 "Claude Code"，点确认</li>
+    <li>页面弹出以 <code>sk-</code> 开头的密钥</li>
+    <li>⚠️ <strong>立刻复制粘贴到记事本保存！</strong> 关闭后再也看不到</li>
+  </ol>
+
+  <h3>2.3 充值（最低 ¥10）</h3>
+  <ol>
+    <li>左侧点 <strong>「充值」</strong></li>
+    <li>最低充 ¥10（约 1000 万 token，每天用够撑几个月）</li>
+  </ol>
+
+  <div class="warn">⚠️ API Key 只显示一次！请务必复制保存到安全的地方。</div>
+
+  <h3>2.4 在 Claude Code 中配置 DeepSeek</h3>
+  <p><strong>方式一：QClaw 图形化配置（推荐）</strong></p>
+  <ol>
+    <li>QClaw → <strong>「设置」</strong> → <strong>「模型配置」</strong></li>
+    <li>API 地址填：<code>https://api.deepseek.com/v1</code></li>
+    <li>API Key 填：刚才保存的 <code>sk-xxxx</code></li>
+    <li>模型名选：<code>deepseek-chat</code></li>
+    <li>点「保存」→「测试连接」→ 绿色 ✅ 即成功</li>
+  </ol>
+
+  <p><strong>方式二：手动设环境变量</strong></p>
+  <p>打开 <strong>PowerShell</strong>，逐条执行（替换 <code>你的key</code>）：</p>
+  <pre><code>[Environment]::SetEnvironmentVariable("ANTHROPIC_API_KEY", "你的key", "User")
+[Environment]::SetEnvironmentVariable("ANTHROPIC_BASE_URL", "https://api.deepseek.com/v1", "User")
+[Environment]::SetEnvironmentVariable("ANTHROPIC_DEFAULT_HAIKU_MODEL", "deepseek-chat", "User")
+[Environment]::SetEnvironmentVariable("ANTHROPIC_DEFAULT_SONNET_MODEL", "deepseek-chat", "User")
+[Environment]::SetEnvironmentVariable("ANTHROPIC_DEFAULT_OPUS_MODEL", "deepseek-chat", "User")</code></pre>
+  <p>执行完<strong>重启 QClaw</strong>，配置生效。</p>
+
+  <h3>2.5 验证</h3>
+  <pre><code>claude -p "你是什么模型"</code></pre>
+  <p>回复含 "DeepSeek" 即配置正确 ✅</p>
+</div>
+
+<!-- ====== Part 3: CC-Switch ====== -->
+<div class="section">
+  <h2><span class="step-label">3</span> 用 CC-Switch 管理模型切换</h2>
+  <p>CC-Switch 让你在 Claude 官方和 DeepSeek 之间<strong>一键切换</strong>，不同任务选不同模型。</p>
+
+  <h3>3.1 下载 CC-Switch</h3>
+  <div class="url-box">🔗 <a href="https://cc-switch.app" target="_blank">https://cc-switch.app</a></div>
+  <p>浏览器打开 → 点「下载」→ 双击安装 → 启动（系统托盘出现图标）。</p>
+
+  <h3>3.2 添加 DeepSeek 模型</h3>
+  <ol>
+    <li>打开 CC-Switch → <strong>「模型管理」</strong></li>
+    <li>点 <strong>「添加模型」</strong></li>
+    <li>选择 <code>DeepSeek V4 Pro</code></li>
+    <li>填入你的 API Key（第 2 步获取的那个）</li>
+    <li>API 地址设为：<code>https://api.deepseek.com/v1</code></li>
+    <li>保存</li>
+  </ol>
+
+  <h3>3.3 一键切换模型</h3>
+  <ol>
+    <li>CC-Switch 主界面选择当前想用的模型</li>
+    <li>选 DeepSeek：便宜日常用</li>
+    <li>选 Claude：复杂任务用</li>
+    <li>切换即生效，无需重启</li>
+  </ol>
+
+  <div class="note">💡 状态栏显示 🟢 "DeepSeek V4 Pro 已连接" 即一切就绪。</div>
+</div>
+
+<!-- ====== Bonus ====== -->
+<div class="section">
+  <h2><span class="step-label">🎁</span> 附赠：让 Claude Code 帮你清理 C 盘</h2>
+  <p>安装完成后，在终端（或 QClaw 指令框）输入：</p>
+  <pre><code>claude -p "分析C盘空间占用，找出可清理的临时文件、缓存、旧驱动安装包、浏览器缓存，列出清单让我确认后清理。危险操作必须先征得我同意。"</code></pre>
+  <p>Claude Code 会自动扫描 C 盘，给你一份清理清单，你确认后它才执行。</p>
+</div>
+
+<hr>
+<div class="footer">
+  <p>QClaw &amp; CC-Switch 为第三方开源工具 · DeepSeek 为独立 AI 服务商</p>
+</div>
+
+</div>
+
+</body>
+</html>
