@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Claude Code 瀹夎鏁欑▼ 鈥?QClaw + DeepSeek + CC-Switch</title>
+<title>Claude Code 安装教程 — QClaw + DeepSeek + CC-Switch</title>
 <style>
   :root {
     --bg: #0d1117;
@@ -153,143 +153,142 @@
 
 <div id="app">
 
-<h1>馃殌 Claude Code 瀹夎 & DeepSeek V4 Pro 鎺ュ叆</h1>
-<p class="subtitle">鐓х潃鏈〉涓€姝ユ鎿嶄綔锛?0 鍒嗛挓瀹屾垚 路 鍏ㄧ▼鏃犻渶杩滅▼鍗忓姪</p>
+<h1>Claude Code 安装 & DeepSeek V4 Pro 接入</h1>
+<p class="subtitle">照着本页一步步操作，10 分钟完成 · 全程无需远程协助</p>
 
 <div class="hero-card">
-  <p>鏈暀绋嬪皢甯︿綘瀹屾垚涓変欢浜嬶細</p>
+  <p>本教程将带你完成三件事：</p>
   <div class="hero-stats">
-    <div class="hero-stat"><div class="num">1</div><div class="label">鐢?QClaw 瀹夎<br>Claude Code</div></div>
-    <div class="hero-stat"><div class="num">2</div><div class="label">娉ㄥ唽 DeepSeek<br>鑾峰彇 API Key</div></div>
-    <div class="hero-stat"><div class="num">3</div><div class="label">鐢?CC-Switch<br>绠＄悊妯″瀷鍒囨崲</div></div>
+    <div class="hero-stat"><div class="num">1</div><div class="label">用 QClaw 安装<br>Claude Code</div></div>
+    <div class="hero-stat"><div class="num">2</div><div class="label">注册 DeepSeek<br>获取 API Key</div></div>
+    <div class="hero-stat"><div class="num">3</div><div class="label">用 CC-Switch<br>管理模型切换</div></div>
   </div>
 </div>
 
 <!-- ====== Part 1: QClaw ====== -->
 <div class="section">
-  <h2><span class="step-label">1</span> 鐢?QClaw 瀹夎 Claude Code</h2>
-  <p>QClaw 鏄涓夋柟妗岄潰绠＄悊宸ュ叿锛?strong>鍥惧舰鍖栦竴閿畨瑁?/strong>锛屾棤闇€鏁插懡浠ゃ€?/p>
+  <h2><span class="step-label">1</span> 用 QClaw 安装 Claude Code</h2>
+  <p>QClaw 是第三方桌面管理工具，<strong>图形化一键安装</strong>，无需敲命令。</p>
 
-  <h3>1.1 鎵撳紑 QClaw 瀹樼綉涓嬭浇</h3>
-  <div class="url-box">馃敆 <a href="https://qclaw.app" target="_blank">https://qclaw.app</a></div>
-  <p>鐢ㄦ祻瑙堝櫒鎵撳紑 鈫?鐐瑰嚮銆屼笅杞姐€嶁啋 鍙屽嚮瀹夎鍖?鈫?鎸夋彁绀哄畬鎴愬畨瑁?鈫?鍚姩 QClaw銆?/p>
+  <h3>1.1 打开 QClaw 官网下载</h3>
+  <div class="url-box"><a href="https://qclaw.app" target="_blank">https://qclaw.app</a></div>
+  <p>用浏览器打开 → 点击「下载」→ 双击安装包 → 按提示完成安装 → 启动 QClaw。</p>
 
-  <h3>1.2 鍦?QClaw 涓畨瑁?Claude Code</h3>
+  <h3>1.2 在 QClaw 中安装 Claude Code</h3>
   <ol>
-    <li>鍚姩 QClaw锛岃繘鍏ヤ富鐣岄潰</li>
-    <li>鐐瑰嚮宸︿晶鑿滃崟 <strong>銆屽畨瑁?Claude Code銆?/strong></li>
-    <li>鐐瑰嚮 <strong>銆屼竴閿畨瑁呫€?/strong></li>
-    <li>绛夊緟鑷姩瀹屾垚 Node.js 妫€娴?+ Claude Code 瀹夎锛堢害 2 鍒嗛挓锛?/li>
-    <li>鐪嬪埌 <strong>"宸插畨瑁?鉁?</strong> 鍗冲畬鎴?/li>
+    <li>启动 QClaw，进入主界面</li>
+    <li>点击左侧菜单 <strong>「安装 Claude Code」</strong></li>
+    <li>点击 <strong>「一键安装」</strong></li>
+    <li>等待自动完成 Node.js 检测 + Claude Code 安装（约 2 分钟）</li>
+    <li>看到 <strong>"已安装"</strong> 即完成</li>
   </ol>
 
-  <h3>1.3 楠岃瘉瀹夎</h3>
-  <p>鍦?QClaw 鐨勫懡浠よ緭鍏ユ杈撳叆锛?/p>
+  <h3>1.3 验证安装</h3>
+  <p>在 QClaw 的命令输入框输入：</p>
   <pre><code>claude --version</code></pre>
-  <p>杩斿洖鐗堟湰鍙凤紙濡?v1.0.x锛夎鏄庡畨瑁呮垚鍔熴€?/p>
+  <p>返回版本号（如 v1.0.x）说明安装成功。</p>
 
   <div class="note">
-    馃挕 QClaw 鑷姩澶勭悊 Node.js 渚濊禆锛屼綘涓嶉渶瑕佹墜鍔ㄥ畨瑁呬换浣曞叾浠栦笢瑗裤€?  </div>
+    QClaw 自动处理 Node.js 依赖，你不需要手动安装任何其他东西。
+  </div>
 </div>
 
 <!-- ====== Part 2: DeepSeek ====== -->
 <div class="section">
-  <h2><span class="step-label">2</span> 娉ㄥ唽 DeepSeek 鑾峰彇 API Key</h2>
-  <p>Claude Code 榛樿璧?Anthropic 瀹樻柟 API锛堣吹涓旈渶娴峰鍗★級銆傛帴 DeepSeek V4 Pro 鍙 楼1/鐧句竾 token锛屽鏃ュ父鐢ㄥ緢涔呫€?/p>
+  <h2><span class="step-label">2</span> 注册 DeepSeek 获取 API Key</h2>
+  <p>Claude Code 默认走 Anthropic 官方 API（贵且需海外卡）。接 DeepSeek V4 Pro 只要很低成本，够日常用很久。</p>
 
-  <h3>2.1 娉ㄥ唽璐﹀彿</h3>
-  <div class="url-box">馃敆 <a href="https://platform.deepseek.com" target="_blank">https://platform.deepseek.com</a></div>
+  <h3>2.1 注册账号</h3>
+  <div class="url-box"><a href="https://platform.deepseek.com" target="_blank">https://platform.deepseek.com</a></div>
   <ol>
-    <li>鎵撳紑缃戝潃 鈫?鐐?<strong>銆屾敞鍐屻€?/strong>锛堟墜鏈哄彿鎴栭偖绠憋級</li>
-    <li>娉ㄥ唽瀹岀櫥褰曪紝杩涘叆鎺у埗鍙?/li>
+    <li>打开网址 → 点 <strong>「注册」</strong>（手机号或邮箱）</li>
+    <li>注册完登录，进入控制台</li>
   </ol>
 
-  <h3>2.2 鍒涘缓 API Key</h3>
+  <h3>2.2 创建 API Key</h3>
   <ol>
-    <li>宸︿晶鑿滃崟鐐?<strong>銆孉PI Keys銆?/strong></li>
-    <li>鐐?<strong>銆屽垱寤?API Key銆?/strong></li>
-    <li>鍚嶇О濉?"Claude Code"锛岀偣纭</li>
-    <li>椤甸潰寮瑰嚭浠?<code>sk-</code> 寮€澶寸殑瀵嗛挜</li>
-    <li>鈿狅笍 <strong>绔嬪埢澶嶅埗绮樿创鍒拌浜嬫湰淇濆瓨锛?/strong> 鍏抽棴鍚庡啀涔熺湅涓嶅埌</li>
+    <li>左侧菜单点 <strong>「API Keys」</strong></li>
+    <li>点 <strong>「创建 API Key」</strong></li>
+    <li>名称填 "Claude Code"，点确认</li>
+    <li>页面弹出以 <code>sk-</code> 开头的密钥</li>
+    <li><strong>立刻复制粘贴到记事本保存！</strong> 关闭后再也看不到</li>
   </ol>
 
-  <h3>2.3 鍏呭€硷紙鏈€浣?楼10锛?/h3>
+  <h3>2.3 充值（最低 10 元）</h3>
   <ol>
-    <li>宸︿晶鐐?<strong>銆屽厖鍊笺€?/strong></li>
-    <li>鏈€浣庡厖 楼10锛堢害 1000 涓?token锛屾瘡澶╃敤澶熸拺鍑犱釜鏈堬級</li>
+    <li>左侧点 <strong>「充值」</strong></li>
+    <li>最低充 10 元，每天用够撑几个月</li>
   </ol>
 
-  <div class="warn">鈿狅笍 API Key 鍙樉绀轰竴娆★紒璇峰姟蹇呭鍒朵繚瀛樺埌瀹夊叏鐨勫湴鏂广€?/div>
+  <div class="warn">API Key 只显示一次！请务必复制保存到安全的地方。</div>
 
-  <h3>2.4 鍦?Claude Code 涓厤缃?DeepSeek</h3>
-  <p><strong>鏂瑰紡涓€锛歈Claw 鍥惧舰鍖栭厤缃紙鎺ㄨ崘锛?/strong></p>
+  <h3>2.4 在 Claude Code 中配置 DeepSeek</h3>
+  <p><strong>方式一：QClaw 图形化配置（推荐）</strong></p>
   <ol>
-    <li>QClaw 鈫?<strong>銆岃缃€?/strong> 鈫?<strong>銆屾ā鍨嬮厤缃€?/strong></li>
-    <li>API 鍦板潃濉細<code>https://api.deepseek.com/v1</code></li>
-    <li>API Key 濉細鍒氭墠淇濆瓨鐨?<code>sk-xxxx</code></li>
-    <li>妯″瀷鍚嶉€夛細<code>deepseek-chat</code></li>
-    <li>鐐广€屼繚瀛樸€嶁啋銆屾祴璇曡繛鎺ャ€嶁啋 缁胯壊 鉁?鍗虫垚鍔?/li>
+    <li>QClaw → <strong>「设置」</strong> → <strong>「模型配置」</strong></li>
+    <li>API 地址填：<code>https://api.deepseek.com/v1</code></li>
+    <li>API Key 填：刚才保存的 <code>sk-xxxx</code></li>
+    <li>模型名选：<code>deepseek-chat</code></li>
+    <li>点「保存」→「测试连接」→ 绿色 即成功</li>
   </ol>
 
-  <p><strong>鏂瑰紡浜岋細鎵嬪姩璁剧幆澧冨彉閲?/strong></p>
-  <p>鎵撳紑 <strong>PowerShell</strong>锛岄€愭潯鎵ц锛堟浛鎹?<code>浣犵殑key</code>锛夛細</p>
-  <pre><code>[Environment]::SetEnvironmentVariable("ANTHROPIC_API_KEY", "浣犵殑key", "User")
+  <p><strong>方式二：手动设环境变量</strong></p>
+  <p>打开 <strong>PowerShell</strong>，逐条执行（替换 <code>你的key</code>）：</p>
+  <pre><code>[Environment]::SetEnvironmentVariable("ANTHROPIC_API_KEY", "你的key", "User")
 [Environment]::SetEnvironmentVariable("ANTHROPIC_BASE_URL", "https://api.deepseek.com/v1", "User")
 [Environment]::SetEnvironmentVariable("ANTHROPIC_DEFAULT_HAIKU_MODEL", "deepseek-chat", "User")
 [Environment]::SetEnvironmentVariable("ANTHROPIC_DEFAULT_SONNET_MODEL", "deepseek-chat", "User")
 [Environment]::SetEnvironmentVariable("ANTHROPIC_DEFAULT_OPUS_MODEL", "deepseek-chat", "User")</code></pre>
-  <p>鎵ц瀹?strong>閲嶅惎 QClaw</strong>锛岄厤缃敓鏁堛€?/p>
+  <p>执行完<strong>重启 QClaw</strong>，配置生效。</p>
 
-  <h3>2.5 楠岃瘉</h3>
-  <pre><code>claude -p "浣犳槸浠€涔堟ā鍨?</code></pre>
-  <p>鍥炲鍚?"DeepSeek" 鍗抽厤缃纭?鉁?/p>
+  <h3>2.5 验证</h3>
+  <pre><code>claude -p "你是什么模型"</code></pre>
+  <p>回复含 "DeepSeek" 即配置正确</p>
 </div>
 
 <!-- ====== Part 3: CC-Switch ====== -->
 <div class="section">
-  <h2><span class="step-label">3</span> 鐢?CC-Switch 绠＄悊妯″瀷鍒囨崲</h2>
-  <p>CC-Switch 璁╀綘鍦?Claude 瀹樻柟鍜?DeepSeek 涔嬮棿<strong>涓€閿垏鎹?/strong>锛屼笉鍚屼换鍔￠€変笉鍚屾ā鍨嬨€?/p>
+  <h2><span class="step-label">3</span> 用 CC-Switch 管理模型切换</h2>
+  <p>CC-Switch 让你在 Claude 官方和 DeepSeek 之间<strong>一键切换</strong>，不同任务选不同模型。</p>
 
-  <h3>3.1 涓嬭浇 CC-Switch</h3>
-  <div class="url-box">馃敆 <a href="https://cc-switch.app" target="_blank">https://cc-switch.app</a></div>
-  <p>娴忚鍣ㄦ墦寮€ 鈫?鐐广€屼笅杞姐€嶁啋 鍙屽嚮瀹夎 鈫?鍚姩锛堢郴缁熸墭鐩樺嚭鐜板浘鏍囷級銆?/p>
+  <h3>3.1 下载 CC-Switch</h3>
+  <div class="url-box"><a href="https://cc-switch.app" target="_blank">https://cc-switch.app</a></div>
+  <p>浏览器打开 → 点「下载」→ 双击安装 → 启动（系统托盘出现图标）。</p>
 
-  <h3>3.2 娣诲姞 DeepSeek 妯″瀷</h3>
+  <h3>3.2 添加 DeepSeek 模型</h3>
   <ol>
-    <li>鎵撳紑 CC-Switch 鈫?<strong>銆屾ā鍨嬬鐞嗐€?/strong></li>
-    <li>鐐?<strong>銆屾坊鍔犳ā鍨嬨€?/strong></li>
-    <li>閫夋嫨 <code>DeepSeek V4 Pro</code></li>
-    <li>濉叆浣犵殑 API Key锛堢 2 姝ヨ幏鍙栫殑閭ｄ釜锛?/li>
-    <li>API 鍦板潃璁句负锛?code>https://api.deepseek.com/v1</code></li>
-    <li>淇濆瓨</li>
+    <li>打开 CC-Switch → <strong>「模型管理」</strong></li>
+    <li>点 <strong>「添加模型」</strong></li>
+    <li>选择 <code>DeepSeek V4 Pro</code></li>
+    <li>填入你的 API Key（第 2 步获取的那个）</li>
+    <li>API 地址设为：<code>https://api.deepseek.com/v1</code></li>
+    <li>保存</li>
   </ol>
 
-  <h3>3.3 涓€閿垏鎹㈡ā鍨?/h3>
+  <h3>3.3 一键切换模型</h3>
   <ol>
-    <li>CC-Switch 涓荤晫闈㈤€夋嫨褰撳墠鎯崇敤鐨勬ā鍨?/li>
-    <li>閫?DeepSeek锛氫究瀹滄棩甯哥敤</li>
-    <li>閫?Claude锛氬鏉備换鍔＄敤</li>
-    <li>鍒囨崲鍗崇敓鏁堬紝鏃犻渶閲嶅惎</li>
+    <li>CC-Switch 主界面选择当前想用的模型</li>
+    <li>选 DeepSeek：便宜日常用</li>
+    <li>选 Claude：复杂任务用</li>
+    <li>切换即生效，无需重启</li>
   </ol>
 
-  <div class="note">馃挕 鐘舵€佹爮鏄剧ず 馃煝 "DeepSeek V4 Pro 宸茶繛鎺? 鍗充竴鍒囧氨缁€?/div>
+  <div class="note">状态栏显示 "DeepSeek V4 Pro 已连接" 即一切就绪。</div>
 </div>
 
 <!-- ====== Bonus ====== -->
 <div class="section">
-  <h2><span class="step-label">馃巵</span> 闄勮禒锛氳 Claude Code 甯綘娓呯悊 C 鐩?/h2>
-  <p>瀹夎瀹屾垚鍚庯紝鍦ㄧ粓绔紙鎴?QClaw 鎸囦护妗嗭級杈撳叆锛?/p>
-  <pre><code>claude -p "鍒嗘瀽C鐩樼┖闂村崰鐢紝鎵惧嚭鍙竻鐞嗙殑涓存椂鏂囦欢銆佺紦瀛樸€佹棫椹卞姩瀹夎鍖呫€佹祻瑙堝櫒缂撳瓨锛屽垪鍑烘竻鍗曡鎴戠‘璁ゅ悗娓呯悊銆傚嵄闄╂搷浣滃繀椤诲厛寰佸緱鎴戝悓鎰忋€?</code></pre>
-  <p>Claude Code 浼氳嚜鍔ㄦ壂鎻?C 鐩橈紝缁欎綘涓€浠芥竻鐞嗘竻鍗曪紝浣犵‘璁ゅ悗瀹冩墠鎵ц銆?/p>
+  <h2>附赠：让 Claude Code 帮你清理 C 盘</h2>
+  <p>安装完成后，在终端（或 QClaw 指令框）输入：</p>
+  <pre><code>claude -p "分析C盘空间占用，找出可清理的临时文件、缓存、旧驱动安装包、浏览器缓存，列出清单让我确认后清理。危险操作必须先征得我同意。"</code></pre>
+  <p>Claude Code 会自动扫描 C 盘，给你一份清理清单，你确认后它才执行。</p>
 </div>
 
 <hr>
 <div class="footer">
-  <p>QClaw &amp; CC-Switch 涓虹涓夋柟寮€婧愬伐鍏?路 DeepSeek 涓虹嫭绔?AI 鏈嶅姟鍟?/p>
+  <p>QClaw &amp; CC-Switch 为第三方工具 · DeepSeek 为独立 AI 服务商</p>
 </div>
 
 </div>
-
 </body>
 </html>
-
