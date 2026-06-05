@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Code 安装教程 — 加密页面</title>
+<!-- PWD_HASH_PLACEHOLDER -->
+<meta name="pwd-hash" content="e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855">
+<style>
+  :root {
+    --bg: #0d1117;
+    --card: #161b22;
+    --border: #30363d;
+    --text: #c9d1d9;
+    --accent: #58a6ff;
+    --green: #3fb950;
+    --orange: #d2991d;
+    --red: #f85149;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Microsoft YaHei", "Segoe UI", sans-serif;
+    line-height: 1.8;
+    font-size: 17px;
+  }
+
+  /* ===== LOCK SCREEN ===== */
+  #lock-screen {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 20px;
+  }
+  #lock-screen .lock-icon { font-size: 56px; margin-bottom: 16px; }
+  #lock-screen h2 { font-size: 1.5em; margin-bottom: 6px; }
+  #lock-screen .lock-hint { color: #8b949e; margin-bottom: 24px; font-size: 0.95em; text-align: center; }
+  .lock-input-row { display: flex; gap: 10px; align-items: center; }
+  .lock-input-row input {
+    background: #0d1117;
+    border: 2px solid var(--border);
+    color: var(--text);
+    padding: 14px 20px;
+    border-radius: 10px;
+    font-size: 1.15em;
+    width: 260px;
+    outline: none;
+    transition: border .2s;
+    text-align: center;
+    letter-spacing: 4px;
+  }
+  .lock-input-row input:focus { border-color: var(--accent); }
+  .lock-input-row button {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 14px 30px;
+    border-radius: 10px;
+    font-size: 1.05em;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all .2s;
+  }
+  .lock-input-row button:hover { opacity: 0.85; transform: translateY(-1px); }
+  #lock-error { color: var(--red); margin-top: 14px; font-size: 0.9em; display: none; }
+  #lock-info { color: #484f58; margin-top: 30px; font-size: 0.8em; text-align: center; }
+
+  /* ===== MAIN CONTENT ===== */
+  #app {
+    display: none;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px 60px;
+  }
+
+  .hero {
+    text-align: center;
+    padding: 60px 20px 40px;
+    background: linear-gradient(180deg, #1a2332 0%, var(--bg) 100%);
+  }
+  .hero .icon { font-size: 64px; margin-bottom: 12px; }
+  .hero h1 {
+    font-size: 2.4em;
+    background: linear-gradient(135deg, #58a6ff, #f778ba);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+  .hero .badge {
+    display: inline-block;
+    background: #2b1a3a;
+    color: #f778ba;
+    border: 1px solid #5a2a7a;
+    padding: 4px 16px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    margin-bottom: 10px;
+  }
+  .hero p { color: #8b949e; font-size: 1.1em; }
+
+  .step {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px;
+    margin-bottom: 28px;
+  }
+  .step-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+  .step-num {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3em;
+    font-weight: 800;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .step-num.blue { background: #1f6feb; }
+  .step-num.green { background: #238636; }
+  .step-num.orange { background: #9e6a03; }
+  .step-num.purple { background: #8250df; }
+
+  .step h2 { font-size: 1.3em; }
+  .step p { margin: 10px 0; color: #b0b8c1; }
+
+  .big-btn {
+    display: inline-block;
+    padding: 14px 36px;
+    font-size: 1.1em;
+    font-weight: 700;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #fff !important;
+    background: #238636;
+    transition: all 0.2s;
+    margin: 10px 0;
+  }
+  .big-btn:hover { background: #2ea043; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(35,134,54,0.3); }
+  .big-btn.blue { background: #1f6feb; }
+  .big-btn.blue:hover { background: #388bfd; box-shadow: 0 4px 16px rgba(31,111,235,0.3); }
+
+  pre {
+    background: #0d1117;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    overflow-x: auto;
+    font-size: 0.95em;
+    margin: 12px 0;
+    position: relative;
+  }
+  code { font-family: "Cascadia Code", "Fira Code", Consolas, "Microsoft YaHei Mono", monospace; }
+
+  .copy-btn {
+    position: absolute;
+    top: 10px; right: 10px;
+    background: #21262d;
+    border: 1px solid var(--border);
+    color: #8b949e;
+    padding: 4px 12px;
+    border-radius: 6px;
+    font-size: 0.75em;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .copy-btn:hover { color: #fff; border-color: #8b949e; }
+  .copy-btn.copied { background: #1b3a2a; color: var(--green); border-color: var(--green); }
+
+  .tip {
+    background: #1b2230;
+    border-left: 4px solid var(--accent);
+    padding: 12px 18px;
+    border-radius: 0 10px 10px 0;
+    margin: 14px 0;
+    font-size: 0.95em;
+  }
+  .tip.warn {
+    background: #2b1a1a;
+    border-left-color: var(--orange);
+  }
+  .tip.good {
+    background: #1a2b1f;
+    border-left-color: var(--green);
+  }
+  .tip .emoji { font-size: 1.2em; margin-right: 4px; }
+
+  ol, ul { margin-left: 22px; }
+  li { margin: 6px 0; color: #b0b8c1; }
+  a { color: var(--accent); }
+  hr { border-color: var(--border); margin: 20px 0; }
+  .footer { text-align: center; color: #484f58; font-size: 0.85em; padding: 20px; }
+
+  #logout-btn {
+    position: fixed;
+    top: 16px;
+    right: 20px;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: #8b949e;
+    padding: 6px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.8em;
+    display: none;
+    z-index: 100;
+  }
+  #logout-btn:hover { color: var(--text); border-color: var(--red); }
+</style>
+</head>
+<body>
+
+<!-- ====== LOCK SCREEN ====== -->
+<div id="lock-screen">
+  <div class="lock-icon">🔐</div>
+  <h2>Claude Code 安装教程</h2>
+  <p class="lock-hint">本页面需要每日密码才能访问<br>密码每天北京时间 00:00 更新</p>
+  <div class="lock-input-row">
+    <input type="password" id="pwd" placeholder="请输入今日密码" autofocus onkeydown="if(event.key==='Enter')unlock()">
+    <button onclick="unlock()">🔓 解锁</button>
+  </div>
+  <p id="lock-error">❌ 密码错误，请确认今日密码后重试</p>
+  <div id="lock-info">
+    <p>📧 每日密码发送至：2914079658@qq.com</p>
+    <p style="margin-top:4px;">⏰ 每天凌晨 00:00 自动更新</p>
+  </div>
+</div>
+
+<!-- ====== LOGOUT BUTTON ====== -->
+<button id="logout-btn" onclick="lock()">🔒 锁定页面</button>
+
+<!-- ====== MAIN CONTENT ====== -->
+<div id="app">
+
+<div class="hero">
+  <div class="icon">🤖</div>
+  <div class="badge">电脑小白专用 · 零基础也能装</div>
+  <h1>Claude Code 下载 & 安装教程</h1>
+  <p>跟着本页一步步操作，15 分钟即可完成</p>
+</div>
+
+<!-- Step 1 -->
+<div class="step">
+  <div class="step-header">
+    <span class="step-num blue">1</span>
+    <h2>安装 Node.js（必须的第一步）</h2>
+  </div>
+  <p>Claude Code 需要一个叫 <strong>Node.js</strong> 的运行环境。你只需要安装它，不需要学它。</p>
+
+  <p><strong>👉 点击下面按钮，下载 Node.js 安装包：</strong></p>
+  <a class="big-btn blue" href="https://nodejs.org/zh-cn" target="_blank">🔗 打开 Node.js 官网下载</a>
+
+  <p style="margin-top:16px;">打开网页后，你会看到两个绿色大按钮：</p>
+  <ul>
+    <li>点左边的 <strong>LTS</strong> 按钮（长期支持版，最稳定）</li>
+    <li>下载完成后，<strong>双击</strong> 下载的文件</li>
+    <li>一路点 <strong>「Next >」</strong>（下一步），不用改任何选项</li>
+    <li>最后点 <strong>「Install」</strong>（安装），等进度条跑完</li>
+    <li>安装完点 <strong>「Finish」</strong></li>
+  </ul>
+
+  <div class="tip">
+    <span class="emoji">💡</span> 就像安装普通软件一样，一直点"下一步"就行。不需要改任何设置。
+  </div>
+
+  <p><strong>验证安装成功：</strong></p>
+  <p>在电脑搜索框输入 <code>PowerShell</code>，打开后输入：</p>
+  <pre style="position:relative;"><code id="cmd-node">node --version</code><button class="copy-btn" onclick="copyCmd('cmd-node', this)">📋 复制</button></pre>
+  <p>如果看到一行数字（如 <code>v22.12.0</code>），说明安装成功 ✅</p>
+  <div class="tip warn">
+    <span class="emoji">⚠️</span> 如果显示"不是内部命令"或报错，<strong>重启电脑</strong>再试。
+  </div>
+</div>
+
+<!-- Step 2 -->
+<div class="step">
+  <div class="step-header">
+    <span class="step-num green">2</span>
+    <h2>安装 Claude Code</h2>
+  </div>
+  <p>确保第一步的 Node.js 装好了，然后开始装 Claude Code。</p>
+
+  <p><strong>1. 打开 PowerShell</strong></p>
+  <p>点电脑左下角「开始」→ 输入 <code>PowerShell</code> → 点击打开（蓝色图标那个）</p>
+
+  <p><strong>2. 复制下面这行命令：</strong></p>
+  <pre style="position:relative;"><code id="cmd-install">npm install -g @anthropic-ai/claude-code</code><button class="copy-btn" onclick="copyCmd('cmd-install', this)">📋 复制</button></pre>
+
+  <p><strong>3. 粘贴到 PowerShell 里，按回车</strong></p>
+  <p>在 PowerShell 窗口里右键一下，命令就粘贴进去了，然后按 <strong>Enter</strong>。</p>
+  <p>等待 1-2 分钟，看到安装完成提示即可。</p>
+
+  <div class="tip good">
+    <span class="emoji">✅</span> 看到 <code>added xxx packages</code> 或者没有任何红色报错，就是安装成功了。
+  </div>
+
+  <p><strong>4. 验证安装：</strong></p>
+  <pre style="position:relative;"><code id="cmd-version">claude --version</code><button class="copy-btn" onclick="copyCmd('cmd-version', this)">📋 复制</button></pre>
+  <p>显示版本号就是装好了 🎉</p>
+</div>
+
+<!-- Step 3 -->
+<div class="step">
+  <div class="step-header">
+    <span class="step-num orange">3</span>
+    <h2>第一次启动 Claude Code</h2>
+  </div>
+  <p>在 <strong>PowerShell</strong> 里输入：</p>
+  <pre style="position:relative;"><code id="cmd-launch">claude</code><button class="copy-btn" onclick="copyCmd('cmd-launch', this)">📋 复制</button></pre>
+
+  <p>第一次启动：</p>
+  <ol>
+    <li><strong>自动下载</strong>核心程序（约 50MB，1-2 分钟）</li>
+    <li>浏览器弹出登录页，用 Google/GitHub 账号登录（或用 API Key）</li>
+    <li>验证完后进入对话界面，成功！</li>
+  </ol>
+
+  <div class="tip warn">
+    <span class="emoji">⚠️</span> 如果卡在下载很久不动，按 <code>Ctrl + C</code> 关掉重试。
+  </div>
+</div>
+
+<!-- Step 4 -->
+<div class="step">
+  <div class="step-header">
+    <span class="step-num purple">4</span>
+    <h2>开始使用</h2>
+  </div>
+  <p>成功后直接打中文跟它对话：</p>
+  <pre style="position:relative;"><code id="cmd-demo1">帮我看看我电脑上装了什么软件</code><button class="copy-btn" onclick="copyCmd('cmd-demo1', this)">📋 复制</button></pre>
+  <pre style="position:relative;"><code id="cmd-demo2">分析一下C盘空间占用情况</code><button class="copy-btn" onclick="copyCmd('cmd-demo2', this)">📋 复制</button></pre>
+</div>
+
+<!-- FAQ -->
+<div class="step">
+  <div class="step-header">
+    <span class="step-num blue">❓</span>
+    <h2>常见问题</h2>
+  </div>
+  <p><strong>Q: 安装时一直转圈/下载慢？</strong><br>A: 关掉防火墙/杀毒软件试试，或连手机热点。</p>
+  <p><strong>Q: 想用 DeepSeek API？</strong><br>A: 参考 <a href="https://zero05060126.github.io/claude-guide/" target="_blank">进阶教程</a>。</p>
+  <p><strong>Q: 忘记今日密码？</strong><br>A: 查看当天凌晨发给 2914079658@qq.com 的邮件。</p>
+</div>
+
+<hr>
+<div class="footer">
+  <p>📅 密码每日 00:00 自动更新 · 📧 新密码发送至 2914079658@qq.com</p>
+</div>
+
+</div>
+
+<script>
+// ===== Password verification using SHA-256 =====
+var PWD_HASH = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+
+async function sha256(message) {
+  var msgBuffer = new TextEncoder().encode(message);
+  var hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+  var hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map(function(b) { return b.toString(16).padStart(2, '0'); }).join('');
+}
+
+async function unlock() {
+  var input = document.getElementById("pwd").value.trim();
+  if (!input) return;
+
+  var hash = await sha256(input);
+  if (hash === PWD_HASH) {
+    document.getElementById("lock-screen").style.display = "none";
+    document.getElementById("app").style.display = "block";
+    document.getElementById("logout-btn").style.display = "block";
+    document.getElementById("lock-error").style.display = "none";
+  } else {
+    document.getElementById("lock-error").style.display = "block";
+    document.getElementById("pwd").value = "";
+    document.getElementById("pwd").focus();
+  }
+}
+
+function lock() {
+  document.getElementById("lock-screen").style.display = "flex";
+  document.getElementById("app").style.display = "none";
+  document.getElementById("logout-btn").style.display = "none";
+  document.getElementById("pwd").value = "";
+  document.getElementById("pwd").focus();
+}
+
+function copyCmd(id, btn) {
+  var code = document.getElementById(id);
+  var text = code.textContent || code.innerText;
+  navigator.clipboard.writeText(text.trim()).then(function() {
+    btn.textContent = '✅ 已复制';
+    btn.classList.add('copied');
+    setTimeout(function() {
+      btn.textContent = '📋 复制';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+
+// Load hash from meta tag (set by GitHub Action)
+window.addEventListener('DOMContentLoaded', function() {
+  var meta = document.querySelector('meta[name="pwd-hash"]');
+  if (meta) {
+    PWD_HASH = meta.getAttribute('content');
+  }
+});
+</script>
+
+</body>
+</html>
