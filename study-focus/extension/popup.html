@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>学习专注助手</title>
+<style>
+:root {
+  --bg: #111125;
+  --card: rgba(255,255,255,0.03);
+  --border: rgba(255,255,255,0.08);
+  --text: #d8d8e8;
+  --text-dim: #8080a0;
+  --accent: #818cf8;
+  --green: #4ade80;
+  --red: #f87171;
+  --radius: 12px;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  width:340px;min-height:420px;
+  font-family:var(--font);
+  background:var(--bg);
+  color:var(--text);
+  padding:0;overflow-x:hidden;
+}
+.header{
+  padding:20px 20px 16px;
+  text-align:center;
+  border-bottom:1px solid var(--border);
+}
+.header h2{font-size:1.1rem;font-weight:700;margin-bottom:4px}
+.header .subtitle{font-size:0.78rem;color:var(--text-dim)}
+.toggle-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 20px;border-bottom:1px solid var(--border);
+}
+.toggle-label{font-size:0.9rem;font-weight:600}
+.toggle-switch{
+  position:relative;width:48px;height:28px;
+  background:rgba(255,255,255,0.1);border-radius:28px;
+  cursor:pointer;transition:background 0.2s;
+}
+.toggle-switch.active{background:var(--accent)}
+.toggle-switch::after{
+  content:'';position:absolute;top:3px;left:3px;
+  width:22px;height:22px;background:#fff;border-radius:50%;
+  transition:transform 0.2s;
+}
+.toggle-switch.active::after{transform:translateX(20px)}
+.stats-row{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:10px;
+  padding:16px 20px;border-bottom:1px solid var(--border);
+}
+.stat-item{
+  text-align:center;padding:12px 8px;
+  background:var(--card);border-radius:var(--radius);
+  border:1px solid var(--border);
+}
+.stat-item .value{font-size:1.5rem;font-weight:800;color:var(--accent)}
+.stat-item .label{font-size:0.72rem;color:var(--text-dim);margin-top:2px}
+.section{
+  padding:14px 20px;border-bottom:1px solid var(--border);
+}
+.section h3{font-size:0.85rem;font-weight:600;margin-bottom:10px}
+.site-list{max-height:120px;overflow-y:auto}
+.site-item{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:6px 10px;border-radius:6px;font-size:0.82rem;
+  color:var(--text-dim);
+}
+.site-item:hover{background:rgba(255,255,255,0.02)}
+.site-item button{background:none;border:none;color:var(--red);cursor:pointer;font-size:0.9rem;opacity:0.5;padding:2px 4px}
+.site-item button:hover{opacity:1}
+.add-form{display:flex;gap:6px;margin-top:8px}
+.add-form input{
+  flex:1;background:rgba(255,255,255,0.04);border:1px solid var(--border);
+  border-radius:8px;padding:6px 10px;color:var(--text);font-size:0.8rem;
+  font-family:var(--font);outline:none;
+}
+.add-form input:focus{border-color:var(--accent)}
+.add-form button{
+  background:var(--accent);color:#fff;border:none;border-radius:8px;
+  padding:6px 12px;font-size:0.8rem;cursor:pointer;font-weight:600;font-family:var(--font);
+}
+.add-form button:hover{opacity:0.9}
+.url-input{
+  width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--border);
+  border-radius:8px;padding:8px 10px;color:var(--text);font-size:0.78rem;
+  font-family:var(--font);outline:none;
+}
+.url-input:focus{border-color:var(--accent)}
+.hint{font-size:0.7rem;color:var(--text-dim);margin-top:4px;opacity:0.7}
+.footer{padding:12px 20px;text-align:center}
+.footer p{font-size:0.7rem;color:var(--text-dim);opacity:0.5}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h2>🧘 学习专注助手</h2>
+  <p class="subtitle">守护你的注意力</p>
+</div>
+
+<div class="toggle-row">
+  <span class="toggle-label">拦截开关</span>
+  <div class="toggle-switch active" id="toggleEnabled"></div>
+</div>
+
+<div class="stats-row">
+  <div class="stat-item">
+    <div class="value" id="statTotal">0</div>
+    <div class="label">今日已拦截</div>
+  </div>
+  <div class="stat-item">
+    <div class="value" id="statTop">-</div>
+    <div class="label">最常访问</div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>🚫 拦截列表</h3>
+  <div class="site-list" id="siteList"></div>
+  <div class="add-form">
+    <input type="text" id="newSite" placeholder="输入域名..." />
+    <button id="btnAdd">添加</button>
+  </div>
+</div>
+
+<div class="section">
+  <h3>🔗 重定向地址</h3>
+  <input type="text" class="url-input" id="redirectUrl"
+    placeholder="留空使用内置页面" />
+  <p class="hint">填入你部署的公开网页地址，留空则使用扩展内置页面</p>
+</div>
+
+<div class="footer">
+  <p>每一次克制，就意味着比以前更强大 💪</p>
+</div>
+
+<script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "学习专注 - 防分心助手",
+  "version": "1.0.0",
+  "description": "自动检测并拦截娱乐网站（抖音、B站、YouTube等），帮你保持学习专注",
+  "permissions": ["webNavigation", "storage", "tabs"],
+  "host_permissions": ["<all_urls>"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "学习专注助手"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["focus.html"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

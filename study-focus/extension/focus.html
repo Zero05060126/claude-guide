@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>保持专注</title>
+<style>
+:root {
+  --bg: #0a0a1e;
+  --text: #e0e0f0;
+  --text-dim: #8080aa;
+  --accent: #818cf8;
+  --red: #fca5a5;
+  --card: rgba(255,255,255,0.03);
+  --border: rgba(255,255,255,0.06);
+  --radius: 16px;
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:var(--font);
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:20px;
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(129,140,248,0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 50%, rgba(248,113,113,0.03) 0%, transparent 50%);
+}
+.container{text-align:center;max-width:480px}
+.icon{font-size:4rem;margin-bottom:16px}
+h1{
+  font-size:2rem;font-weight:800;
+  background:linear-gradient(135deg,#c4b5fd,#818cf8);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  margin-bottom:8px;
+}
+.toast{
+  background:rgba(248,113,113,0.08);border:1px solid rgba(248,113,113,0.2);
+  padding:12px 24px;border-radius:50px;margin:16px auto;
+  font-size:0.9rem;display:inline-block;
+}
+.toast .site{font-weight:700;color:var(--red)}
+.message{font-size:1rem;color:var(--text-dim);line-height:1.7;margin:20px 0}
+.timer-display{font-size:3.5rem;font-weight:800;font-variant-numeric:tabular-nums;margin:16px 0}
+.btn{
+  display:inline-block;background:var(--accent);color:#fff;
+  border:none;padding:12px 32px;border-radius:50px;font-size:1rem;
+  cursor:pointer;font-weight:600;font-family:var(--font);
+  text-decoration:none;transition:all 0.2s;
+}
+.btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(129,140,248,0.3)}
+.btn-ghost{
+  background:transparent;border:1px solid rgba(255,255,255,0.12);
+  color:var(--text-dim);margin-left:8px;
+}
+.btn-ghost:hover{background:rgba(255,255,255,0.03);box-shadow:none}
+.stats{font-size:0.85rem;color:var(--text-dim);margin-top:24px;opacity:0.7}
+.footer{margin-top:40px;opacity:0.35;font-size:0.78rem;color:var(--text-dim)}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="icon">🧘</div>
+  <h1>保持专注</h1>
+  <div class="toast" id="toast" style="display:none">
+    🚫 你试图访问 <span class="site" id="toastSite"></span>，已被拦截
+  </div>
+  <p class="message">
+    别让算法偷走你的时间。<br>
+    每一次克制，就意味着比以前更强大。
+  </p>
+  <div class="timer-display" id="timerDisplay">00:00</div>
+  <p style="font-size:0.8rem;color:var(--text-dim)">从打开此页面开始计时</p>
+  <p class="stats" id="statsLine"></p>
+  <div style="margin-top:20px">
+    <button class="btn" id="btnStartFocus">▶ 开始专注</button>
+    <a href="https://github.com" class="btn btn-ghost" style="font-size:0.85rem">📖 去学习吧 →</a>
+  </div>
+  <div class="footer">
+    <p>自律不是自虐，而是对自己未来的温柔</p>
+  </div>
+</div>
+
+<script>
+const $=s=>document.querySelector(s);
+const params=new URLSearchParams(location.search);
+const from=params.get('from');
+if(from){
+  $('#toast').style.display='inline-block';
+  $('#toastSite').textContent=from;
+  history.replaceState(null,'',location.pathname);
+}
+const today=new Date().toISOString().split('T')[0];
+let data=JSON.parse(localStorage.getItem('sf_focus')||'{"date":"","redirects":0,"focusSeconds":0}');
+if(data.date!==today){data={date:today,redirects:0,focusSeconds:0};}
+if(from){data.redirects++;}
+let sec=data.focusSeconds||0;
+function fmt(s){const m=Math.floor(s/60),sec=s%60;return `${String(m).padStart(2,'0')}:${String(sec).padStart(2,'0')}`}
+function updateStats(){
+  $('#timerDisplay').textContent=fmt(sec);
+  $('#statsLine').textContent=`今日已拦截 ${data.redirects} 次 · 已专注 ${Math.floor(sec/60)} 分钟`;
+}
+let interval=null;
+function startTimer(){
+  if(interval)return;
+  interval=setInterval(()=>{
+    sec++;data.focusSeconds=sec;
+    localStorage.setItem('sf_focus',JSON.stringify(data));
+    updateStats();
+  },1000);
+}
+updateStats();
+startTimer();
+$('#btnStartFocus').addEventListener('click',()=>{
+  if(!document.fullscreenElement){
+    document.documentElement.requestFullscreen().catch(()=>{});
+  }
+  startTimer();
+  $('#btnStartFocus').textContent='✅ 专注中...';
+  setTimeout(()=>{$('#btnStartFocus').textContent='▶ 开始专注'},2000);
+});
+</script>
+</body>
+</html>
